@@ -2,8 +2,12 @@ from django.contrib.contenttypes.fields import GenericForeignKey, GenericRelatio
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import ForeignKey, PositiveIntegerField, CharField
-from django.utils.encoding import python_2_unicode_compatible
 from typedmodels.models import TypedModel
+
+try:
+    from django.utils.encoding import python_2_unicode_compatible
+except ImportError:
+    python_2_unicode_compatible = lambda x: x
 
 from six import text_type
 
