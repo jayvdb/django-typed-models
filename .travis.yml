@@ -25,6 +25,9 @@ install:
   - "pip install $PIP_DJANGO pyyaml coveralls pytest-django"
   - "pip install -e ."
 script:
-  coverage run $VIRTUAL_ENV/bin/py.test --ds=test_settings typedmodels/tests.py
+  - export DJANGO_SETTINGS_MODULE=test_settings
+  - PYTHONPATH=. django-admin makemigrations
+  - PYTHONPATH=. django-admin migrate
+  - coverage run $VIRTUAL_ENV/bin/py.test --ds=test_settings typedmodels/tests.py
 after_success:
   coveralls
